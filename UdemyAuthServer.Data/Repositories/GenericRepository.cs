@@ -51,5 +51,6 @@ namespace UdemyAuthServer.Data.Repositories
         {
             return _dbSet.Where(predicate);
         }
+
     }
 }

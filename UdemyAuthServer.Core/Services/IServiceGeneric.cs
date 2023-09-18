@@ -12,9 +12,9 @@ namespace UdemyAuthServer.Core.Services
     {
         Task<Response<TDto>> GetByIdAsync(int id);
         Task<Response<IEnumerable<TDto>>> GetAllAsync();
-        Task<Response<IEnumerable<TDto>>> WhereAsync(Expression<Func<TDto, bool>> predicate);
-        Task<Response<TDto>> AddAsync(TEntity entity);
-        Task<Response<NoDataDto>> RemoveAsync(TEntity entity);
-        Task<Response<NoDataDto>> UpdateAsync(TEntity entity);
+        Task<Response<IEnumerable<TDto>>> WhereAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<Response<TDto>> AddAsync(TDto entity);
+        Task<Response<NoDataDto>> RemoveAsync(int id);
+        Task<Response<NoDataDto>> UpdateAsync(TDto entity, int id);
     }
 }
