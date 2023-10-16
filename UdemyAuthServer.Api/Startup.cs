@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UdemyAuthServer.Core.Configuration;
+using UdemyAuthServer.Core.Models;
 using UdemyAuthServer.Core.Repositories;
 using UdemyAuthServer.Core.Services;
 using UdemyAuthServer.Core.UnitOfWork;
@@ -44,11 +47,46 @@ namespace UdemyAuthServer.Api
             services.AddScoped(typeof(IServiceGeneric<,>),typeof(ServiceGeneric<,>));
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer();
-            });
 
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServer"), sqlOpt =>
+                {
+                    sqlOpt.MigrationsAssembly("UdemyAuthServer.Data");
+
+                });
+
+            });
+            services.AddIdentity<UserApp, IdentityRole>(opt =>
+            {
+                opt.User.RequireUniqueEmail = true;
+                opt.Password.RequireNonAlphanumeric = false;
+            
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             services.Configure<CustomTokenOptions>(Configuration.GetSection("TokenOption"));
             services.Configure<List<Client>>(Configuration.GetSection("Clients"));
+
+            var tokenOptions = Configuration.GetSection("TokenOption").Get<CustomTokenOptions>();
+
+            services.AddAuthentication(opt =>
+            {
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opts =>
+            {
+                opts.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                {
+                    ValidIssuer = tokenOptions.Issuer,
+                    ValidAudience = tokenOptions.Audience[0],
+                    IssuerSigningKey = SignService.GetSymmetricSecurityKey(tokenOptions.SecurityKey),
+
+                    ValidateIssuerSigningKey = true,
+                    ValidateAudience = true,
+                    ValidateIssuer = true,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+
+                };
+            });
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -71,6 +109,7 @@ namespace UdemyAuthServer.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
