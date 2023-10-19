@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using SharedLibrary.Confifuration;
+using SharedLibrary.Extensions;
+using SharedLibrary.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,12 +58,16 @@ namespace UdemyAuthServer.Api
                 });
 
             });
+
+
+
             services.AddIdentity<UserApp, IdentityRole>(opt =>
             {
                 opt.User.RequireUniqueEmail = true;
                 opt.Password.RequireNonAlphanumeric = false;
             
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
             services.Configure<CustomTokenOptions>(Configuration.GetSection("TokenOption"));
             services.Configure<List<Client>>(Configuration.GetSection("Clients"));
 
@@ -76,7 +83,7 @@ namespace UdemyAuthServer.Api
                 {
                     ValidIssuer = tokenOptions.Issuer,
                     ValidAudience = tokenOptions.Audience[0],
-                    IssuerSigningKey = SignService.GetSymmetricSecurityKey(tokenOptions.SecurityKey),
+                    IssuerSigningKey = SharedLibrary.Services.SignService.GetSymmetricSecurityKey(tokenOptions.SecurityKey),
 
                     ValidateIssuerSigningKey = true,
                     ValidateAudience = true,
@@ -89,6 +96,9 @@ namespace UdemyAuthServer.Api
 
 
             services.AddControllers();
+            services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+            services.UseCustomValidationResponse();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UdemyAuthServer.Api", Version = "v1" });
@@ -104,6 +114,10 @@ namespace UdemyAuthServer.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UdemyAuthServer.Api v1"));
             }
+            else
+            {
+            }
+            app.UseCustomException();
 
             app.UseHttpsRedirection();
 
