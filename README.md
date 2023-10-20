@@ -2,7 +2,7 @@
 Bu proje Fatih Çakıroğlu'nun Udemy kursu: "Asp.Net Core API + Token bazlı kimlik doğrulama(JWT)" ile birlikte geliştirilmiştir.
 Kursta sıfırdan başlayarak katmanlı mimari ile bir Api projesi oluşturduk ve token bazlı kimlik doğrulama ve yetkilendirme sistemini kurduk.
 
-##Kursta Öğrenilenler:
+## Kursta Öğrenilenler:
 
 -Token bazlı kimlik doğrulama için katmanlı mimari ile api projesi nasıl geliştirilir ?
 -Token bazlı kimlik doğrulama ile başka API'lerimizi nasıl koruma altına alabiliriz  ?
