@@ -6,11 +6,11 @@ using System.Security.Claims;
 
 namespace MiniApp1.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class StockController : ControllerBase
     {
+        [Authorize(Policy = "AgePolicy")]
         [HttpGet]
         public IActionResult GetStock()
         {

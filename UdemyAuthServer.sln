@@ -3,21 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyAuthServer.Api", "UdemyAuthServer.Api\UdemyAuthServer.Api.csproj", "{2FF4B055-7D1D-4EA2-B3E4-50792BD9C4B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyAuthServer.Api", "UdemyAuthServer.Api\UdemyAuthServer.Api.csproj", "{2FF4B055-7D1D-4EA2-B3E4-50792BD9C4B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyAuthServer.Core", "UdemyAuthServer.Core\UdemyAuthServer.Core.csproj", "{E0751C9A-AFD5-404D-941E-E3CD0DB81A9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyAuthServer.Core", "UdemyAuthServer.Core\UdemyAuthServer.Core.csproj", "{E0751C9A-AFD5-404D-941E-E3CD0DB81A9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyAuthServer.Data", "UdemyAuthServer.Data\UdemyAuthServer.Data.csproj", "{624FA1F0-B5AD-45CD-901D-01F7F1C3C632}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyAuthServer.Data", "UdemyAuthServer.Data\UdemyAuthServer.Data.csproj", "{624FA1F0-B5AD-45CD-901D-01F7F1C3C632}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdemyAuthServer.Service", "UdemyAuthServer.Service\UdemyAuthServer.Service.csproj", "{AECA6668-90BC-42DA-9B0E-8EF675269CFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UdemyAuthServer.Service", "UdemyAuthServer.Service\UdemyAuthServer.Service.csproj", "{AECA6668-90BC-42DA-9B0E-8EF675269CFB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniApp1.API", "MiniApp1.API\MiniApp1.API.csproj", "{67A32CC5-C85B-4DC2-988D-AA63666A7CD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniApp1.API", "MiniApp1.API\MiniApp1.API.csproj", "{67A32CC5-C85B-4DC2-988D-AA63666A7CD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniApp2.API", "MiniApp2.API\MiniApp2.API.csproj", "{CA59C9B5-1C17-4D04-A774-BE218EE9801B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniApp2.API", "MiniApp2.API\MiniApp2.API.csproj", "{CA59C9B5-1C17-4D04-A774-BE218EE9801B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniApp3.API", "MiniApp3.API\MiniApp3.API.csproj", "{48F6154A-F3E6-47DB-9B78-3AEB06F4EADE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniApp3.API", "MiniApp3.API\MiniApp3.API.csproj", "{48F6154A-F3E6-47DB-9B78-3AEB06F4EADE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLibrary", "SharedLibrary\SharedLibrary.csproj", "{A8F7F400-8197-43B2-9D5D-DC47E30A1C72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLibrary", "SharedLibrary\SharedLibrary.csproj", "{A8F7F400-8197-43B2-9D5D-DC47E30A1C72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppChat", "WebAppChat\WebAppChat.csproj", "{F64B6385-33CE-4E43-8A07-5D97D49311EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{A8F7F400-8197-43B2-9D5D-DC47E30A1C72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8F7F400-8197-43B2-9D5D-DC47E30A1C72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8F7F400-8197-43B2-9D5D-DC47E30A1C72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F64B6385-33CE-4E43-8A07-5D97D49311EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F64B6385-33CE-4E43-8A07-5D97D49311EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F64B6385-33CE-4E43-8A07-5D97D49311EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F64B6385-33CE-4E43-8A07-5D97D49311EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

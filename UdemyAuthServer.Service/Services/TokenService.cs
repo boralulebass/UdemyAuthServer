@@ -37,16 +37,21 @@ namespace UdemyAuthServer.Service.Services
             return Convert.ToBase64String(numberByte);
         }
 
-        private IEnumerable<Claim> GetClaims(UserApp userApp, List<String> audiences)
+        private async Task<IEnumerable<Claim>> GetClaims(UserApp userApp, List<String> audiences)
         {
+            var userRoles = await _userManager.GetRolesAsync(userApp);
+
             var userList = new List<Claim>
             { new Claim(ClaimTypes.NameIdentifier,userApp.Id),
             new Claim(JwtRegisteredClaimNames.Email,userApp.Email),
             new Claim(ClaimTypes.Name, userApp.UserName),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim("city",userApp.City),
+            new Claim("birth-date",userApp.BirthDate.ToShortDateString())
             };
 
             userList.AddRange(audiences.Select(x => new Claim(JwtRegisteredClaimNames.Aud,x)));
+            userList.AddRange(userRoles.Select(x=>new Claim(ClaimTypes.Role, x)));
 
             return userList;
 
@@ -75,7 +80,7 @@ namespace UdemyAuthServer.Service.Services
                 issuer: _tokenOptions.Issuer,
                 expires: accessTokenExpiration,
                 notBefore: DateTime.Now,
-                claims: GetClaims(userApp, _tokenOptions.Audience),
+                claims: GetClaims(userApp, _tokenOptions.Audience).Result,
                 signingCredentials: signingCredentials);
             var handler = new JwtSecurityTokenHandler();
             var token = handler.WriteToken(jwtSecurityToken);
